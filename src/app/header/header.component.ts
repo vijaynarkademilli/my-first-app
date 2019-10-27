@@ -1,4 +1,4 @@
-import {Component,EventEmitter,Output} from '@angular/core';
+import {Component} from '@angular/core';
 /**
  * Created by madhuri on 22-10-2019.
  */
@@ -8,12 +8,6 @@ import {Component,EventEmitter,Output} from '@angular/core';
   templateUrl:'./header.component.html'
 })
 export class HeaderComponent{
-
-  @Output() featureSelected = new EventEmitter<string>();
-
-  onSelect(feature:string){
-      this.featureSelected.emit(feature);
-  }
 
 
 }
