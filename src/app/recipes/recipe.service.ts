@@ -2,6 +2,7 @@ import {Recipe} from './recipe.model';
 import {EventEmitter,Injectable} from '@angular/core';
 import {Ingredient} from "../shared/ingredient.model";
 import {ShoppingListService} from "../shopping-list/shopping-list.service";
+import {Subject} from 'rxjs';
 /**
  * Created by madhuri on 27-10-2019.
  */
@@ -13,13 +14,14 @@ export class RecipeService{
     }
 
     recipeSelected = new EventEmitter<Recipe>();
+    recipeChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe('Big Fat Burger',
               'This is simple test',
               'https://tul.imgix.net/content/article/perths_best_burgers.jpg',
               [
-                new Ingredient('Bub',2),
+                new Ingredient('Bun',2),
                 new Ingredient('French Fries',30)
               ]),
     new Recipe('Rice Kheer',
@@ -41,6 +43,16 @@ export class RecipeService{
 
   getRecipe(id:number){
     return this.recipes[id];
+  }
+
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe);
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index:number,recipe: Recipe){
+    this.recipes[index] = recipe;
+    this.recipeChanged.next(this.recipes.slice());
   }
 
 
