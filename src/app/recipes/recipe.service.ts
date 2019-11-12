@@ -3,7 +3,7 @@ import {EventEmitter,Injectable} from '@angular/core';
 import {Ingredient} from "../shared/ingredient.model";
 import {ShoppingListService} from "../shopping-list/shopping-list.service";
 import {Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map,tap} from 'rxjs/operators';
 import {HttpClient} from "@angular/common/http";
 /**
  * Created by vijay on 27-10-2019.
@@ -21,17 +21,18 @@ export class RecipeService{
   private recipes: Recipe[] = [];
 
   getRecipies(){
-    this.http.get<Recipe[]>('http://localhost:8085/allrecipes').pipe(map(recipes => {
+    return this.http.get<Recipe[]>('http://localhost:8085/allrecipes').pipe(map(recipes => {
       return recipes.map( recipe => {
         return {...recipe,ingredients:recipe.ingredients ? recipe.ingredients :[]};
       });
-    }))
-    .subscribe(
-    response => {
-      //noinspection TypeScriptValidateTypes
-      this.recipes = response;
-    });
+    }),
+      tap( recipes => {
+        this.recipes = recipes;
+        this.recipeChanged.next(this.recipes.slice());
+      }))
+  }
 
+  getAllRecipes(){
     return this.recipes.slice();
   }
 
