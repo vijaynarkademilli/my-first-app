@@ -13,13 +13,12 @@ export class ShoppingListService{
   ingredientsChanged = new Subject<Ingredient[]>();
   startedEditing = new Subject<number>();
 
-  private ingredients : Ingredient[] = [
-    new Ingredient('Apples',5),
-    new Ingredient('Tomatos',10),
-  ];
+  private ingredients : Ingredient[] = [];
 
   getIngredients(){
-    return this.ingredients.slice();
+    if(this.ingredients !== undefined){
+      return this.ingredients.slice();
+    }
   }
 
   addIngredient(ingredient:Ingredient){
