@@ -4,7 +4,7 @@ import {Ingredient} from "../shared/ingredient.model";
 import {ShoppingListService} from "../shopping-list/shopping-list.service";
 import {Subject} from 'rxjs';
 import {map,tap} from 'rxjs/operators';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient,HttpHeaders} from "@angular/common/http";
 /**
  * Created by vijay on 27-10-2019.
  */
