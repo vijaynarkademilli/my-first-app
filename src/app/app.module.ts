@@ -20,6 +20,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {DataStorageService} from "./shared/data-storage.service";
 import {RecipeResolverService} from "./recipes/recipe-resolver.service";
 import {HttpIntercepterBasicAuthServiceService} from "./services/http-intercepter-basic-auth-service.service";
+import { AuthComponent } from './auth/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {HttpIntercepterBasicAuthServiceService} from "./services/http-intercepte
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
